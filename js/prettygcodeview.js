@@ -205,7 +205,15 @@ $(function () {
                         uploadGcode(files[0])
                         //            /*UPLOAD FILES HERE*/
                         //upload(e.originalEvent.dataTransfer.files);
-                    }   
+                    } else {
+                        const url = e.originalEvent.dataTransfer.getData('text');
+                        if(url && txt.startsWith(window.location.protocol + "//")) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            $("#status-name").html(url);
+                            uploadGcode(url);
+                        }
+                    }
                 }
             }
         );
